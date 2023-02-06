@@ -1,9 +1,6 @@
 package com.gestaoensino.gestao_ensino.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,5 +15,8 @@ public class Aluno {
     private String nomeCompleto;
     private String telefoneResponsavel;
     private Date dataNascimento;
+    @ManyToOne
+    @JoinColumn(name = "turma_id", nullable = true)
+    private Turma turma;
 
 }
