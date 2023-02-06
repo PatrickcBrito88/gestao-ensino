@@ -1,19 +1,18 @@
 package com.gestaoensino.gestao_ensino.api.resouces;
 
-import com.gestaoensino.gestao_ensino.api.dtos.ProfessorDto;
+import com.gestaoensino.gestao_ensino.api.dtos.ProfessorDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
+import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sistema-gestao-ensino/professor")
-public class ProfessorLeituraResource {
+public class ProfessorLeituraResource extends GestaoEnsinoResource {
 
     private final ProfessorService professorService;
 
@@ -23,14 +22,14 @@ public class ProfessorLeituraResource {
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
-    private List<ProfessorDto> buscarTodosProfessores(){
-        return professorService.listarProfessores();
+    private ResponseEntity<RestResponseDTO<List<ProfessorDTO>>> buscarTodosProfessores(){
+        return retornarSucesso(professorService.listarProfessores());
     }
 
     @GetMapping(value = "/buscar/{idProfessor}")
     @ResponseStatus(HttpStatus.OK)
-    private ProfessorDto buscarTodosProfessores(@PathVariable Long idProfessor){
-        return professorService.buscarProfessor(idProfessor);
+    private ResponseEntity<RestResponseDTO<ProfessorDTO>> buscarProfessor(@PathVariable Long idProfessor){
+        return retornarSucesso(professorService.buscarProfessor(idProfessor));
     }
 
 

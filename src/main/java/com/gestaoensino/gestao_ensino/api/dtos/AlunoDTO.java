@@ -3,12 +3,13 @@ package com.gestaoensino.gestao_ensino.api.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
-public class ProfessorDto {
+public class AlunoDTO {
 
     private String nomeCompleto;
-    private String nomeComum;
-    private String email;
-    private String telefone;
+    private String telefoneResponsavel;
+    private Date dataNascimento;
 }

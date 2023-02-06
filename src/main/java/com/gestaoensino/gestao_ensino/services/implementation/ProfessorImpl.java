@@ -1,6 +1,6 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
-import com.gestaoensino.gestao_ensino.api.dtos.ProfessorDto;
+import com.gestaoensino.gestao_ensino.api.dtos.ProfessorDTO;
 import com.gestaoensino.gestao_ensino.domain.exception.ProfessorNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.Professor;
 import com.gestaoensino.gestao_ensino.domain.repository.ProfessorRepository;
@@ -24,18 +24,18 @@ public class ProfessorImpl implements ProfessorService {
     }
 
     @Override
-    public ProfessorDto salvarProfessor(ProfessorDto professorDto) {
+    public ProfessorDTO salvarProfessor(ProfessorDTO professorDto) {
         Professor professor = modelMapper.map(professorDto, Professor.class);
         return modelMapper.map(
-                professorRepository.save(professor), ProfessorDto.class);
+                professorRepository.save(professor), ProfessorDTO.class);
     }
 
     @Override
-    public ProfessorDto editarProfessor(Professor professorNovo, Long id) {
+    public ProfessorDTO editarProfessor(Professor professorNovo, Long id) {
         Professor professorAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(professorNovo, professorAtual, "id");
         professorAtual = professorRepository.save(professorAtual);
-        return modelMapper.map(professorAtual, ProfessorDto.class);
+        return modelMapper.map(professorAtual, ProfessorDTO.class);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class ProfessorImpl implements ProfessorService {
     }
 
     @Override
-    public ProfessorDto buscarProfessor(Long id) {
+    public ProfessorDTO buscarProfessor(Long id) {
         Professor professor = buscarOuFalhar(id);
-        return modelMapper.map(professor, ProfessorDto.class);
+        return modelMapper.map(professor, ProfessorDTO.class);
     }
 
     public Professor buscarOuFalhar(Long id) {
@@ -57,9 +57,9 @@ public class ProfessorImpl implements ProfessorService {
     }
 
     @Override
-    public List<ProfessorDto> listarProfessores() {
+    public List<ProfessorDTO> listarProfessores() {
         return professorRepository.findAll().stream()
-                .map(professor -> modelMapper.map(professor, ProfessorDto.class))
+                .map(professor -> modelMapper.map(professor, ProfessorDTO.class))
                 .collect(Collectors.toList());
     }
 }
