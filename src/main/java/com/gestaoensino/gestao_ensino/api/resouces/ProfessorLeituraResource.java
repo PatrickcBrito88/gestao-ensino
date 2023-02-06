@@ -22,13 +22,13 @@ public class ProfessorLeituraResource extends GestaoEnsinoResource {
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<RestResponseDTO<List<ProfessorDTO>>> buscarTodosProfessores(){
+    public ResponseEntity<RestResponseDTO<List<ProfessorDTO>>> buscarTodosProfessores(){
         return retornarSucesso(professorService.listarProfessores());
     }
 
     @GetMapping(value = "/buscar/{idProfessor}")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<RestResponseDTO<ProfessorDTO>> buscarProfessor(@PathVariable Long idProfessor){
+    public ResponseEntity<RestResponseDTO<ProfessorDTO>> buscarProfessor(@PathVariable Long idProfessor){
         return retornarSucesso(professorService.buscarProfessor(idProfessor));
     }
 

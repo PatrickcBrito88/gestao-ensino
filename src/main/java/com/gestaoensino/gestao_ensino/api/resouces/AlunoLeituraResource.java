@@ -22,13 +22,13 @@ public class AlunoLeituraResource extends GestaoEnsinoResource {
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<RestResponseDTO<List<AlunoDTO>>> buscarTodosAlunos(){
+    public ResponseEntity<RestResponseDTO<List<AlunoDTO>>> buscarTodosAlunos(){
         return retornarSucesso(alunoService.listarAlunos());
     }
 
     @GetMapping(value = "/buscar/{idAluno}")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<RestResponseDTO<AlunoDTO>> buscarAluno(@PathVariable Long idAluno){
+    public ResponseEntity<RestResponseDTO<AlunoDTO>> buscarAluno(@PathVariable Long idAluno){
         return retornarSucesso(alunoService.buscarAluno(idAluno));
     }
 }
