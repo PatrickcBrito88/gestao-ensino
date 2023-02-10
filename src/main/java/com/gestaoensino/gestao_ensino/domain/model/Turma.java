@@ -7,9 +7,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,12 +23,28 @@ public class Turma {
     private Long id;
     @OneToMany(mappedBy = "turma")
     @ToString.Exclude
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    private Set<Disciplina> disciplinas = new HashSet<>();
     @OneToMany(mappedBy = "turma")
     @ToString.Exclude
-    private List<Aluno> alunos = new ArrayList<>();
+    private Set<Aluno> alunos = new HashSet<>();
     private String nome;
     private String serie;
+
+    public boolean adicionaDisciplina(Disciplina disciplina){
+        return disciplinas.add(disciplina);
+    }
+
+    public boolean removeDisciplina(Disciplina disciplina){
+        return disciplinas.remove(disciplina);
+    }
+
+    public boolean adicionaAluno(Aluno aluno){
+        return alunos.add(aluno);
+    }
+
+    public boolean removeAluno(Aluno aluno){
+        return alunos.remove(aluno);
+    }
 
     @Override
     public boolean equals(Object o) {

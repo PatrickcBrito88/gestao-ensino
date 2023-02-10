@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DisciplinaImpl  implements DisciplinaService {
+public class DisciplinaServiceImpl implements DisciplinaService {
 
     private final DisciplinaRepository disciplinaRepository;
     private final ModelMapper modelMapper;
 
-    public DisciplinaImpl(DisciplinaRepository disciplinaRepository, ModelMapper modelMapper) {
+    public DisciplinaServiceImpl(DisciplinaRepository disciplinaRepository, ModelMapper modelMapper) {
         this.disciplinaRepository = disciplinaRepository;
         this.modelMapper = modelMapper;
     }

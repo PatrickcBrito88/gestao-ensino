@@ -5,15 +5,16 @@ import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 public class TurmaDTO {
 
     private Long id;
-    private List<Disciplina> disciplinas = new ArrayList<>();
-    private List<Aluno> alunos = new ArrayList<>();
+    private Set<Disciplina> disciplinas = new HashSet<>();
+    private Set<Aluno> alunos = new HashSet<>();
+    private String nome;
 
 }

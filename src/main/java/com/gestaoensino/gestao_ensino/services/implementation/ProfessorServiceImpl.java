@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProfessorImpl implements ProfessorService {
+public class ProfessorServiceImpl implements ProfessorService {
 
     private ProfessorRepository professorRepository;
     private ModelMapper modelMapper;
 
-    public ProfessorImpl(ProfessorRepository professorRepository, ModelMapper modelMapper) {
+    public ProfessorServiceImpl(ProfessorRepository professorRepository, ModelMapper modelMapper) {
         this.professorRepository = professorRepository;
         this.modelMapper = modelMapper;
     }

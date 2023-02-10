@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AlunoImpl implements AlunoService {
+public class AlunoServiceImpl implements AlunoService {
 
     private final AlunoRepository alunoRepository;
 
     private final ModelMapper modelMapper;
 
-    public AlunoImpl(AlunoRepository alunoRepository, ModelMapper modelMapper) {
+    public AlunoServiceImpl(AlunoRepository alunoRepository, ModelMapper modelMapper) {
         this.alunoRepository = alunoRepository;
         this.modelMapper = modelMapper;
     }

@@ -1,25 +1,28 @@
 package com.gestaoensino.gestao_ensino.services;
 
 import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
-import com.gestaoensino.gestao_ensino.domain.model.Aluno;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
+import com.gestaoensino.gestao_ensino.domain.model.Turma;
 
 import java.util.List;
 
 public interface TurmaService {
 
-    TurmaDTO cadastrarTurma (TurmaDTO turmaDTO);
+    Turma cadastrarTurma (TurmaDTO turmaDTO);
 
-    TurmaDTO adicionarDisciplina (Disciplina disciplina);
+    Turma buscarTurma(Long idTurma);
 
-    TurmaDTO adicionarAluno (Aluno aluno);
+    void adicionarDisciplina (Long idDisciplina, Long idTurma);
 
-    List<TurmaDTO> listarTurmas();
+    void adicionarAluno (Long idAluno, Long idTurma);
 
-    TurmaDTO removerDisciplina (Disciplina disciplina);
+    List<Turma> listarTurmas();
 
-    TurmaDTO removerAluno (Aluno aluno);
+    void removerDisciplina (Long idDisciplina, Long idTurma);
+
+    void removerAluno (Long idAluno, Long idTurma);
 
     void apagarTurma(Long id);
+
+    Turma editarDisciplina(String nome, Long id);
 
 }
