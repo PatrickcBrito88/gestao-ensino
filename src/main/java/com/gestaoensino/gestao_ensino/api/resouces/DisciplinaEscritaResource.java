@@ -1,5 +1,6 @@
 package com.gestaoensino.gestao_ensino.api.resouces;
 
+import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
@@ -13,20 +14,22 @@ import org.springframework.web.bind.annotation.*;
 public class DisciplinaEscritaResource extends GestaoEnsinoResource {
 
     private final DisciplinaService disciplinaService;
+    private final DisciplinaAssembler disciplinaAssembler;
 
-    public DisciplinaEscritaResource(DisciplinaService disciplinaService) {
+    public DisciplinaEscritaResource(DisciplinaService disciplinaService, DisciplinaAssembler disciplinaAssembler) {
         this.disciplinaService = disciplinaService;
+        this.disciplinaAssembler = disciplinaAssembler;
     }
 
     @PostMapping(value = "/salvar")
     public ResponseEntity<RestResponseDTO<DisciplinaDTO>> salvarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO){
-        return retornarSucesso(disciplinaService.salvarDisciplina(disciplinaDTO));
+        return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.salvarDisciplina(disciplinaDTO)));
     }
 
     @PutMapping(value = "/atualizar/{idDisciplina}")
     public ResponseEntity<RestResponseDTO<DisciplinaDTO>> editarDisciplina(@RequestBody Disciplina disciplina,
                                                                             @PathVariable Long idDisciplina){
-        return retornarSucesso(disciplinaService.editarDisciplina(disciplina, idDisciplina));
+        return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.editarDisciplina(disciplina, idDisciplina)));
     }
 
     @DeleteMapping(value = "/{idDisciplina}")

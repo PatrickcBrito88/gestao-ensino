@@ -1,5 +1,6 @@
 package com.gestaoensino.gestao_ensino.api.resouces;
 
+import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
@@ -15,20 +16,22 @@ import java.util.List;
 public class AlunoLeituraResource extends GestaoEnsinoResource {
 
     private final AlunoService alunoService;
+    private final AlunoAssembler alunoAssembler;
 
-    public AlunoLeituraResource(AlunoService alunoService) {
+    public AlunoLeituraResource(AlunoService alunoService, AlunoAssembler alunoAssembler) {
         this.alunoService = alunoService;
+        this.alunoAssembler = alunoAssembler;
     }
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<RestResponseDTO<List<AlunoDTO>>> buscarTodosAlunos(){
-        return retornarSucesso(alunoService.listarAlunos());
+        return retornarSucesso(alunoAssembler.montaListDto(alunoService.listarAlunos()));
     }
 
     @GetMapping(value = "/buscar/{idAluno}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<RestResponseDTO<AlunoDTO>> buscarAluno(@PathVariable Long idAluno){
-        return retornarSucesso(alunoService.buscarAluno(idAluno));
+        return retornarSucesso(alunoAssembler.montaDto(alunoService.buscarAluno(idAluno)));
     }
 }

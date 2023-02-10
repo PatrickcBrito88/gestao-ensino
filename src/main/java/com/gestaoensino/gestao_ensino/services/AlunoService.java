@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface AlunoService {
 
-    AlunoDTO salvarAluno (AlunoDTO alunoDto);
-    AlunoDTO editarAluno(Aluno aluno, Long id);
+    Aluno salvarAluno (AlunoDTO alunoDto);
+    Aluno editarAluno(Aluno aluno, Long id);
     void apagarAluno(Long id);
-    AlunoDTO buscarAluno(Long id);
-    List<AlunoDTO> listarAlunos();
+    Aluno buscarAluno(Long id);
+    List<Aluno> listarAlunos();
 }
