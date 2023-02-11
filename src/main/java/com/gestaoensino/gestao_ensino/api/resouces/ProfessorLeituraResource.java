@@ -1,8 +1,8 @@
 package com.gestaoensino.gestao_ensino.api.resouces;
 
 import com.gestaoensino.gestao_ensino.api.assembler.ProfessorAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.ProfessorComIdDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.com_id.ProfessorComIdDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
 import org.springframework.http.HttpStatus;

@@ -6,8 +6,15 @@ import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.domain.model.Aluno;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/sistema-gestao-ensino/aluno")
@@ -22,14 +29,14 @@ public class AlunoEscritaResource extends GestaoEnsinoResource {
     }
 
     @PostMapping(value = "/salvar")
-    private ResponseEntity<RestResponseDTO<AlunoDTO>> salvarAluno(@RequestBody AlunoDTO alunoDto){
-        return retornarSucesso(alunoAssembler.montaDto(alunoService.salvarAluno(alunoDto)));
+    private ResponseEntity<RestResponseDTO<AlunoDTO>> salvarAluno(@RequestBody @Valid AlunoDTO alunoDto){
+        return retornarSucesso(alunoAssembler.montaAlunoDto(alunoService.salvarAluno(alunoDto)));
     }
 
     @PutMapping(value = "/atualizar/{idAluno}")
     private ResponseEntity<RestResponseDTO<AlunoDTO>> editarAluno(@RequestBody Aluno aluno,
                                  @PathVariable Long idAluno){
-        return retornarSucesso(alunoAssembler.montaDto(alunoService.editarAluno(aluno, idAluno)));
+        return retornarSucesso(alunoAssembler.montaAlunoDto(alunoService.editarAluno(aluno, idAluno)));
     }
 
     @DeleteMapping(value = "/{idAluno}")

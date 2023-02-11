@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.api.dtos;
+package com.gestaoensino.gestao_ensino.api.dtos.com_id;
 
 import lombok.Getter;
 import lombok.Setter;

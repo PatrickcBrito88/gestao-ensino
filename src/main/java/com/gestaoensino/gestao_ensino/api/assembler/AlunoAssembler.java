@@ -1,6 +1,7 @@
 package com.gestaoensino.gestao_ensino.api.assembler;
 
 import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.com_id.AlunoComIdDTO;
 import com.gestaoensino.gestao_ensino.domain.model.Aluno;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -17,17 +18,26 @@ public class AlunoAssembler {
         this.modelMapper = modelMapper;
     }
 
-    public AlunoDTO montaDto (Aluno aluno){
+    public AlunoDTO montaAlunoDto(Aluno aluno){
         return modelMapper.map(aluno, AlunoDTO.class);
+    }
+    public AlunoComIdDTO montaAlunoComIdDto(Aluno aluno){
+        return modelMapper.map(aluno, AlunoComIdDTO.class);
     }
 
     public Aluno desmontaDto(AlunoDTO alunoDTO){
         return modelMapper.map(alunoDTO, Aluno.class);
     }
 
-    public List<AlunoDTO> montaListDto(List<Aluno> listAluno){
+    public List<AlunoDTO> montaListAlunoDto(List<Aluno> listAluno){
         return listAluno.stream()
                 .map(turma -> modelMapper.map(turma, AlunoDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<AlunoComIdDTO> montaListAlunoComIdDto(List<Aluno> listAluno){
+        return listAluno.stream()
+                .map(turma -> modelMapper.map(turma, AlunoComIdDTO.class))
                 .collect(Collectors.toList());
     }
 
