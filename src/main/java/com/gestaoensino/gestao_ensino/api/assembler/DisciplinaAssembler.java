@@ -1,6 +1,7 @@
 package com.gestaoensino.gestao_ensino.api.assembler;
 
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.response.DisciplinaResponseDTO;
 import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -20,14 +21,27 @@ public class DisciplinaAssembler {
     public DisciplinaDTO montaDto (Disciplina disciplina){
         return modelMapper.map(disciplina, DisciplinaDTO.class);
     }
+    public DisciplinaResponseDTO montaDisciplinaResponse (Disciplina disciplina){
+        return modelMapper.map(disciplina, DisciplinaResponseDTO.class);
+    }
 
     public Disciplina desmontaDto(DisciplinaDTO disciplinaDTO){
         return modelMapper.map(disciplinaDTO, Disciplina.class);
     }
 
+    public Disciplina desmontaDisciplinaResponse(DisciplinaResponseDTO disciplinaResponseDTO){
+        return modelMapper.map(disciplinaResponseDTO, Disciplina.class);
+    }
+
     public List<DisciplinaDTO> montaListDto(List<Disciplina> listDisciplina){
         return listDisciplina.stream()
                 .map(disciplina -> modelMapper.map(disciplina, DisciplinaDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<DisciplinaResponseDTO> montaListaDisciplinaResponseDto(List<Disciplina> listDisciplina){
+        return listDisciplina.stream()
+                .map(disciplina -> modelMapper.map(disciplina, DisciplinaResponseDTO.class))
                 .collect(Collectors.toList());
     }
 

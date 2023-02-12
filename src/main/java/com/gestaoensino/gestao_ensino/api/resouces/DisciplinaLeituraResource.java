@@ -1,8 +1,8 @@
 package com.gestaoensino.gestao_ensino.api.resouces;
 
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.response.DisciplinaResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +26,12 @@ public class DisciplinaLeituraResource extends GestaoEnsinoResource {
     }
 
     @GetMapping("/{idDisciplina}")
-    public ResponseEntity<RestResponseDTO<DisciplinaDTO>> buscarDisciplina(@PathVariable Long idDisciplina){
-            return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.buscarDisciplina(idDisciplina)));
+    public ResponseEntity<RestResponseDTO<DisciplinaResponseDTO>> buscarDisciplina(@PathVariable Long idDisciplina){
+        return retornarSucesso(disciplinaAssembler.montaDisciplinaResponse(disciplinaService.buscarDisciplina(idDisciplina)));
     }
 
     @GetMapping
-    public ResponseEntity<RestResponseDTO<List<DisciplinaDTO>>> listarDisciplinas(){
-        return retornarSucesso(disciplinaAssembler.montaListDto(disciplinaService.listarDisciplinas()));
+    public ResponseEntity<RestResponseDTO<List<DisciplinaResponseDTO>>> listarDisciplinas(){
+        return retornarSucesso(disciplinaAssembler.montaListaDisciplinaResponseDto(disciplinaService.listarDisciplinas()));
     }
 }

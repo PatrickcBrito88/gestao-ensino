@@ -2,10 +2,11 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
-import com.gestaoensino.gestao_ensino.domain.exception.DisciplinaNaoEncontradaException;
+import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
+import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 
     private Disciplina buscarOuFalhar(Long id){
         return disciplinaRepository.findById(id)
-                .orElseThrow(() -> new DisciplinaNaoEncontradaException(id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        StringUtils.getMensagemValidacao("disciplina.nao.encontrada", id)));
     }
 
     @Override

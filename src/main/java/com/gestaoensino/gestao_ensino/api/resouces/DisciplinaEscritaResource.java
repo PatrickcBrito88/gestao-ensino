@@ -7,7 +7,15 @@ import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/sistema-gestao-ensino/disciplina")
@@ -22,19 +30,20 @@ public class DisciplinaEscritaResource extends GestaoEnsinoResource {
     }
 
     @PostMapping(value = "/salvar")
-    public ResponseEntity<RestResponseDTO<DisciplinaDTO>> salvarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO){
+    public ResponseEntity<RestResponseDTO<DisciplinaDTO>> salvarDisciplina(@RequestBody @Valid DisciplinaDTO disciplinaDTO){
         return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.salvarDisciplina(disciplinaDTO)));
     }
 
     @PutMapping(value = "/atualizar/{idDisciplina}")
-    public ResponseEntity<RestResponseDTO<DisciplinaDTO>> editarDisciplina(@RequestBody Disciplina disciplina,
+    public ResponseEntity<RestResponseDTO<DisciplinaDTO>> editarDisciplina(@RequestBody @Valid DisciplinaDTO disciplinaDTO,
                                                                             @PathVariable Long idDisciplina){
+        Disciplina disciplina = disciplinaAssembler.desmontaDto(disciplinaDTO);
         return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.editarDisciplina(disciplina, idDisciplina)));
     }
 
     @DeleteMapping(value = "/{idDisciplina}")
     public ResponseEntity<RestResponseDTO<String>> apagarDisciplina(@PathVariable Long idDisciplina){
         disciplinaService.apagarDisciplina(idDisciplina);
-        return retornarSucesso("Disciplina apagada com sucesso!");
+        return retornarSucesso("Disciplina deletada com sucesso!");
     }
 }
