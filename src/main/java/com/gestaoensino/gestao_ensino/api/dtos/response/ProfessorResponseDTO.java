@@ -1,11 +1,11 @@
-package com.gestaoensino.gestao_ensino.api.dtos.com_id;
+package com.gestaoensino.gestao_ensino.api.dtos.response;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfessorComIdDTO {
+public class ProfessorResponseDTO {
 
     private Long id;
     private String nomeCompleto;

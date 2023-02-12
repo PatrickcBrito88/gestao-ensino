@@ -2,7 +2,7 @@ package com.gestaoensino.gestao_ensino.api.resouces;
 
 import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
-import com.gestaoensino.gestao_ensino.api.dtos.com_id.AlunoComIdDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.response.AlunoResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,13 @@ public class AlunoLeituraResource extends GestaoEnsinoResource {
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<RestResponseDTO<List<AlunoComIdDTO>>> buscarTodosAlunos(){
+    public ResponseEntity<RestResponseDTO<List<AlunoResponseDTO>>> buscarTodosAlunos(){
         return retornarSucesso(alunoAssembler.montaListAlunoComIdDto(alunoService.listarAlunos()));
     }
 
     @GetMapping(value = "/buscar/{idAluno}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<RestResponseDTO<AlunoComIdDTO>> buscarAluno(@PathVariable Long idAluno){
+    public ResponseEntity<RestResponseDTO<AlunoResponseDTO>> buscarAluno(@PathVariable Long idAluno){
         return retornarSucesso(alunoAssembler.montaAlunoComIdDto(alunoService.buscarAluno(idAluno)));
     }
 }

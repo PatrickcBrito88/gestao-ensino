@@ -2,7 +2,7 @@ package com.gestaoensino.gestao_ensino.api.resouces;
 
 import com.gestaoensino.gestao_ensino.api.assembler.ProfessorAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
-import com.gestaoensino.gestao_ensino.api.dtos.com_id.ProfessorComIdDTO;
+import com.gestaoensino.gestao_ensino.api.dtos.response.ProfessorResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
 import org.springframework.http.HttpStatus;
@@ -30,13 +30,13 @@ public class ProfessorLeituraResource extends GestaoEnsinoResource {
 
     @GetMapping(value = "/listar")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<RestResponseDTO<List<ProfessorComIdDTO>>> buscarTodosProfessores(){
+    public ResponseEntity<RestResponseDTO<List<ProfessorResponseDTO>>> buscarTodosProfessores(){
         return retornarSucesso(professorAssembler.montaListProfessorComIdDto(professorService.listarProfessores()));
     }
 
     @GetMapping(value = "/buscar/{idProfessor}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<RestResponseDTO<ProfessorComIdDTO>> buscarProfessor(@PathVariable Long idProfessor){
+    public ResponseEntity<RestResponseDTO<ProfessorResponseDTO>> buscarProfessor(@PathVariable Long idProfessor){
         return retornarSucesso(professorAssembler.montaProfessorIdDto(professorService.buscarProfessor(idProfessor)));
     }
 

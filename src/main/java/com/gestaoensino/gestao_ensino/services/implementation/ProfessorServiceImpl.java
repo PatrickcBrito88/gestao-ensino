@@ -1,9 +1,10 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
-import com.gestaoensino.gestao_ensino.domain.exception.ProfessorNaoEncontradoException;
+import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.Professor;
 import com.gestaoensino.gestao_ensino.domain.repository.ProfessorRepository;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
+import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
-    private ProfessorRepository professorRepository;
+    private final ProfessorRepository professorRepository;
 
     public ProfessorServiceImpl(ProfessorRepository professorRepository) {
         this.professorRepository = professorRepository;
@@ -47,7 +48,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     public Professor buscarOuFalhar(Long id) {
         return professorRepository.findById(id)
-                .orElseThrow(() -> new ProfessorNaoEncontradoException(id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        StringUtils.getMensagemValidacao("professor.nao.encontrado", id)));
 
     }
 

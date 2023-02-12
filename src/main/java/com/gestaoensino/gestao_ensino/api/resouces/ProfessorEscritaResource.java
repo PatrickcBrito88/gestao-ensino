@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/sistema-gestao-ensino/professor")
 public class ProfessorEscritaResource extends GestaoEnsinoResource {
@@ -31,19 +33,21 @@ public class ProfessorEscritaResource extends GestaoEnsinoResource {
 
     @PostMapping(value = "/salvar")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<RestResponseDTO<ProfessorDTO>> salvarProfessor(@RequestBody Professor professor){
+    public ResponseEntity<RestResponseDTO<ProfessorDTO>> salvarProfessor(@RequestBody @Valid ProfessorDTO professorDTO) {
+        Professor professor = professorAssembler.desmontaDto(professorDTO);
         return retornarSucesso(professorAssembler.montaProfessorDto(professorService.salvarProfessor(professor)));
     }
 
     @PutMapping(value = "/atualizar/{idProfessor}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<RestResponseDTO<ProfessorDTO>> editarProfessor(@RequestBody Professor professor,
-                                        @PathVariable Long idProfessor){
+    public ResponseEntity<RestResponseDTO<ProfessorDTO>> editarProfessor(@RequestBody @Valid ProfessorDTO professorDTO,
+                                                                         @PathVariable Long idProfessor) {
+        Professor professor = professorAssembler.desmontaDto(professorDTO);
         return retornarSucesso(professorAssembler.montaProfessorDto(professorService.editarProfessor(professor, idProfessor)));
     }
 
     @DeleteMapping(value = "/{idProfessor}")
-    public ResponseEntity<RestResponseDTO<String>> apagarProfessor(@PathVariable Long idProfessor){
+    public ResponseEntity<RestResponseDTO<String>> apagarProfessor(@PathVariable Long idProfessor) {
         professorService.apagarProfessor(idProfessor);
         return retornarSucesso("O professor foi deletado com sucesso!");
     }

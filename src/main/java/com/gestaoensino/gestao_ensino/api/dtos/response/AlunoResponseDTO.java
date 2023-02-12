@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.api.dtos.com_id;
+package com.gestaoensino.gestao_ensino.api.dtos.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class AlunoComIdDTO {
+public class AlunoResponseDTO {
 
     private Long id;
     private String nomeCompleto;
