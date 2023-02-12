@@ -6,11 +6,11 @@ import com.gestaoensino.gestao_ensino.domain.exception.DisciplinaNaoEncontradaEx
 import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

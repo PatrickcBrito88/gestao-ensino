@@ -10,10 +10,10 @@ import com.gestaoensino.gestao_ensino.domain.repository.TurmaRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.TurmaService;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
