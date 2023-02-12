@@ -29,8 +29,9 @@ public class AlunoEscritaResource extends GestaoEnsinoResource {
     }
 
     @PutMapping(value = "/atualizar/{idAluno}")
-    private ResponseEntity<RestResponseDTO<AlunoDTO>> editarAluno(@RequestBody Aluno aluno,
+    private ResponseEntity<RestResponseDTO<AlunoDTO>> editarAluno(@RequestBody AlunoDTO alunoDTO,
                                  @PathVariable Long idAluno){
+        Aluno aluno = alunoAssembler.desmontaDto(alunoDTO);
         return retornarSucesso(alunoAssembler.montaAlunoDto(alunoService.editarAluno(aluno, idAluno)));
     }
 

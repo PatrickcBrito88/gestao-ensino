@@ -2,10 +2,12 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
+import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.exception.AlunoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.Aluno;
 import com.gestaoensino.gestao_ensino.domain.repository.AlunoRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
+import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,8 @@ public class AlunoServiceImpl implements AlunoService {
 
     public Aluno buscarOuFalhar(Long id) {
         return alunoRepository.findById(id)
-                .orElseThrow(() -> new AlunoNaoEncontradoException(id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        StringUtils.getMensagemValidacao("aluno.nao.encontrado", id)));
     }
 
     @Override
