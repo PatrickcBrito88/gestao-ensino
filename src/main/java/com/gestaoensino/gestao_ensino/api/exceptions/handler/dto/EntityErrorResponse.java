@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto;
+package com.gestaoensino.gestao_ensino.api.exceptions.handler.dto;
 
 import java.util.List;
 

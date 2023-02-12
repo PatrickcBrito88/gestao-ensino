@@ -1,7 +1,7 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions.handler;
+package com.gestaoensino.gestao_ensino.api.exceptions.handler;
 
-import com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto.InputErrorResponse;
-import com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto.InputValidationError;
+import com.gestaoensino.gestao_ensino.api.exceptions.handler.dto.InputErrorResponse;
+import com.gestaoensino.gestao_ensino.api.exceptions.handler.dto.InputValidationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

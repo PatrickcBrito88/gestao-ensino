@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions;
+package com.gestaoensino.gestao_ensino.api.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

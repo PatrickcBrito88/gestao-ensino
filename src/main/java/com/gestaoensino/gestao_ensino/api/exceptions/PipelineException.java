@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions;
+package com.gestaoensino.gestao_ensino.api.exceptions;
 
 public class PipelineException extends RuntimeException {
 

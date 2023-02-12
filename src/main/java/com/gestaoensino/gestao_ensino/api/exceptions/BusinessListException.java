@@ -1,6 +1,6 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions;
+package com.gestaoensino.gestao_ensino.api.exceptions;
 
-import com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto.StandardError;
+import com.gestaoensino.gestao_ensino.api.exceptions.handler.dto.StandardError;
 
 import java.util.List;
 

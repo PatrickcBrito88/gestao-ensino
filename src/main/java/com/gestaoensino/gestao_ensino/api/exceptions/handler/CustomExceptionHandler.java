@@ -1,9 +1,9 @@
-package com.gestaoensino.gestao_ensino.api.core.exceptions.handler;
+package com.gestaoensino.gestao_ensino.api.exceptions.handler;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.gestaoensino.gestao_ensino.api.core.exceptions.*;
-import com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto.EntityErrorResponse;
-import com.gestaoensino.gestao_ensino.api.core.exceptions.handler.dto.StandardError;
+import com.gestaoensino.gestao_ensino.api.exceptions.*;
+import com.gestaoensino.gestao_ensino.api.exceptions.handler.dto.EntityErrorResponse;
+import com.gestaoensino.gestao_ensino.api.exceptions.handler.dto.StandardError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
