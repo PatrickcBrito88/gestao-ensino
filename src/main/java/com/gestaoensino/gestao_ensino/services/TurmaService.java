@@ -11,15 +11,15 @@ public interface TurmaService {
 
     Turma buscarTurma(Long idTurma);
 
-    void adicionarDisciplina (Long idDisciplina, Long idTurma);
-
-    void adicionarAluno (Long idAluno, Long idTurma);
+//    void adicionarDisciplina (Long idDisciplina, Long idTurma);
+//
+//    void adicionarAluno (Long idAluno, Long idTurma);
 
     List<Turma> listarTurmas();
 
-    void removerDisciplina (Long idDisciplina, Long idTurma);
-
-    void removerAluno (Long idAluno, Long idTurma);
+//    void removerDisciplina (Long idDisciplina, Long idTurma);
+//
+//    void removerAluno (Long idAluno, Long idTurma);
 
     void apagarTurma(Long id);
 

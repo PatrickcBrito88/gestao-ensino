@@ -1,20 +1,21 @@
 package com.gestaoensino.gestao_ensino.api.dtos;
 
-import com.gestaoensino.gestao_ensino.domain.model.Aluno;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 public class TurmaDTO {
 
-    private Long id;
-    private Set<Disciplina> disciplinas = new HashSet<>();
-    private Set<Aluno> alunos = new HashSet<>();
+//    @Size(min = 1, message = "{turma.quantidade.minima.disciplinas}")
+//    private Set<Long> idDisciplinas = new HashSet<>();
+//    @Size(min = 1, message = "{turma.quantidade.minima.alunos}")
+//    private Set<Long> idAlunos = new HashSet<>();
+    @NotBlank(message = "{turma.nome.vazio}")
     private String nome;
+    @NotBlank(message = "{turma.serie.vazio}")
+    private String serie;
 
 }

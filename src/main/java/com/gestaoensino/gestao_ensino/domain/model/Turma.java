@@ -6,10 +6,11 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -21,30 +22,30 @@ public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "turma")
-    @ToString.Exclude
-    private Set<Disciplina> disciplinas = new HashSet<>();
-    @OneToMany(mappedBy = "turma")
-    @ToString.Exclude
-    private Set<Aluno> alunos = new HashSet<>();
+//    @OneToMany(mappedBy = "turma")
+//    @ToString.Exclude
+//    private Set<Disciplina> disciplinas = new HashSet<>();
+//    @OneToMany(mappedBy = "turma")
+//    @ToString.Exclude
+//    private Set<Aluno> alunos = new HashSet<>();
     private String nome;
     private String serie;
 
-    public boolean adicionaDisciplina(Disciplina disciplina){
-        return disciplinas.add(disciplina);
-    }
-
-    public boolean removeDisciplina(Disciplina disciplina){
-        return disciplinas.remove(disciplina);
-    }
-
-    public boolean adicionaAluno(Aluno aluno){
-        return alunos.add(aluno);
-    }
-
-    public boolean removeAluno(Aluno aluno){
-        return alunos.remove(aluno);
-    }
+//    public boolean adicionaDisciplina(Disciplina disciplina){
+//        return disciplinas.add(disciplina);
+//    }
+//
+//    public boolean removeDisciplina(Disciplina disciplina){
+//        return disciplinas.remove(disciplina);
+//    }
+//
+//    public boolean adicionaAluno(Aluno aluno){
+//        return alunos.add(aluno);
+//    }
+//
+//    public boolean removeAluno(Aluno aluno){
+//        return alunos.remove(aluno);
+//    }
 
     @Override
     public boolean equals(Object o) {
