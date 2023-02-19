@@ -1,13 +1,12 @@
 package com.gestaoensino.gestao_ensino.services;
 
-import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 
 import java.util.List;
 
 public interface TurmaService {
 
-    Turma cadastrarTurma (TurmaDTO turmaDTO);
+    Turma cadastrarTurma (Turma turma);
 
     Turma buscarTurma(String idTurma);
 

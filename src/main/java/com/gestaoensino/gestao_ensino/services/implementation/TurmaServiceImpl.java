@@ -1,7 +1,6 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.TurmaAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
@@ -40,6 +39,18 @@ public class TurmaServiceImpl implements TurmaService {
         this.alunoService = alunoService;
     }
 
+    private Integer buscaUltimoNumeroInserido() {
+        List<Turma> turmasCadastradas = CollectionUtils.getListFromIterable(turmaRepository.findAll());
+        if (turmasCadastradas.size() < 1) {
+            return 1;
+        } else {
+            Integer maiorNumeroCadastrado = turmasCadastradas.stream()
+                    .map(Turma::getId)
+                    .max(Long::compare).get();
+            return ++maiorNumeroCadastrado;
+        }
+    }
+
     private Turma buscarOuFalhar(String id){
         return turmaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
@@ -47,13 +58,8 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    public Turma cadastrarTurma(TurmaDTO turmaDTO) {
-        Turma turma = turmaAssembler.desmontaDto(turmaDTO);
-//        Set<Aluno> listaAlunos = montaListaAlunos(turmaDTO.getIdAlunos());
-//        Set<Disciplina> listaDisciplinas = montaListaDisciplinas(turmaDTO.getIdDisciplinas());
-//
-//        turma.setAlunos(listaAlunos);
-//        turma.setDisciplinas(listaDisciplinas);
+    public Turma cadastrarTurma(Turma turma) {
+        turma.setId(buscaUltimoNumeroInserido());
         return turmaRepository.save(turma);
     }
 

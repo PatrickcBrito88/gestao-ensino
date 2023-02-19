@@ -16,7 +16,7 @@ public class Turma {
 
     @Id
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "turmaId-index")
-    private String id;
+    private Integer id;
     private String nome;
     @DynamoDBTypeConvertedEnum
     private ESerie serie;

@@ -12,6 +12,6 @@ import org.springframework.data.redis.core.RedisHash;
 public class Disciplina {
 
     @Id
-    private Long id;
+    private Integer id;
     private String nome;
 }

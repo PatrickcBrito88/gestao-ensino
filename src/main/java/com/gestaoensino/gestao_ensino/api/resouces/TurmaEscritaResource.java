@@ -4,6 +4,7 @@ import com.gestaoensino.gestao_ensino.api.assembler.TurmaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.TurmaService;
@@ -31,7 +32,8 @@ public class TurmaEscritaResource extends GestaoEnsinoResource {
 
     @PostMapping(value = "/salvar")
     public ResponseEntity<RestResponseDTO<TurmaDTO>> cadastrarTurma(@RequestBody TurmaDTO turmaDTO){
-        return retornarSucesso(turmaAssembler.montaDto(turmaService.cadastrarTurma(turmaDTO)));
+        Turma turma = turmaAssembler.desmontaDto(turmaDTO);
+        return retornarSucesso(turmaAssembler.montaDto(turmaService.cadastrarTurma(turma)));
     }
 
     @PutMapping(value = "/editar/{idTurma}")

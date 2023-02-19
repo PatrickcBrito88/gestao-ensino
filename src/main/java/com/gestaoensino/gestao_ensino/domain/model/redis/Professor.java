@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.RedisHash;
 public class Professor {
 
     @Id
-    private Long id;
+    private Integer id;
     private String nomeCompleto;
     private String nomeComum;
     private String email;
