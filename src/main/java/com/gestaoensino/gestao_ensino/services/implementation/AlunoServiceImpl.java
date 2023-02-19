@@ -1,7 +1,6 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import com.gestaoensino.gestao_ensino.domain.repository.AlunoRepository;
@@ -17,11 +16,21 @@ import java.util.List;
 public class AlunoServiceImpl implements AlunoService {
 
     private final AlunoRepository alunoRepository;
-    private final AlunoAssembler alunoAssembler;
 
     public AlunoServiceImpl(AlunoRepository alunoRepository, AlunoAssembler alunoAssembler) {
         this.alunoRepository = alunoRepository;
-        this.alunoAssembler = alunoAssembler;
+    }
+
+    private Integer buscaUltimoNumeroInserido() {
+        List<Aluno> alunosCadastrados = CollectionUtils.getListFromIterable(alunoRepository.findAll());
+        if (alunosCadastrados.size() < 1) {
+            return 1;
+        } else {
+            Integer maiorNumeroCadastrado = alunosCadastrados.stream()
+                    .map(aluno -> aluno.getId())
+                    .max(Long::compare).get();
+            return ++maiorNumeroCadastrado;
+        }
     }
 
     public Aluno buscarOuFalhar(String id) {
@@ -31,8 +40,9 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
-    public Aluno salvarAluno(AlunoDTO alunoDto) {
-        return alunoRepository.save(alunoAssembler.desmontaDto(alunoDto));
+    public Aluno salvarAluno(Aluno aluno) {
+        aluno.setId(buscaUltimoNumeroInserido());
+        return alunoRepository.save(aluno);
     }
 
     @Override
