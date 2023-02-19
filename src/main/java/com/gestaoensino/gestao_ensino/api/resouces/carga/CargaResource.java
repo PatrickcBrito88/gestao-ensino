@@ -9,6 +9,7 @@ import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
+import com.gestaoensino.gestao_ensino.services.TurmaService;
 import com.gestaoensino.gestao_ensino.utils.LeitorJsonUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public class CargaResource extends GestaoEnsinoResource {
     private final AlunoService alunoService;
     private final DisciplinaService disciplinaService;
     private final ProfessorService professorService;
+    private final TurmaService turmaService;
 
     /*
     FOLDERS
@@ -37,12 +39,15 @@ public class CargaResource extends GestaoEnsinoResource {
     protected static final String ALUNO1_JSON = "aluno1.json";
     protected static final String ALUNO2_JSON = "aluno2.json";
     protected static final String ALUNO3_JSON = "aluno3.json";
+
     protected static final String DISCIPLINA1_JSON = "disciplina1.json";
     protected static final String DISCIPLINA2_JSON = "disciplina2.json";
     protected static final String DISCIPLINA3_JSON = "disciplina3.json";
+
     protected static final String PROFESSOR1_JSON = "professor1.json";
     protected static final String PROFESSOR2_JSON = "professor2.json";
     protected static final String PROFESSOR3_JSON = "professor3.json";
+
     protected static final String TURMA1_JSON = "turma1.json";
     protected static final String TURMA2_JSON = "turma2.json";
     protected static final String TURMA3_JSON = "turma3.json";
@@ -89,10 +94,11 @@ public class CargaResource extends GestaoEnsinoResource {
 
     public CargaResource(AlunoService alunoService,
                          DisciplinaService disciplinaService,
-                         ProfessorService professorService) {
+                         ProfessorService professorService, TurmaService turmaService) {
         this.alunoService = alunoService;
         this.disciplinaService = disciplinaService;
         this.professorService = professorService;
+        this.turmaService = turmaService;
     }
 
     @PostMapping("/carga-completa")
@@ -102,6 +108,19 @@ public class CargaResource extends GestaoEnsinoResource {
         alunoService.salvarAluno(getMockAluno3());
 
         disciplinaService.salvarDisciplina(getMockDisciplina1());
+        disciplinaService.salvarDisciplina(getMockDisciplina2());
+        disciplinaService.salvarDisciplina(getMockDisciplina3());
+
+        professorService.salvarProfessor(getMockProfessor1());
+        professorService.salvarProfessor(getMockProfessor2());
+        professorService.salvarProfessor(getMockProfessor3());
+
+        turmaService.cadastrarTurma(getMockTurma1());
+        turmaService.cadastrarTurma(getMockTurma2());
+        turmaService.cadastrarTurma(getMockTurma3());
+
+        return (retornarSucesso("Carga completa realizada com sucesso"));
+
     }
 
 

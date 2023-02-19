@@ -1,0 +1,57 @@
+{
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "id",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "nome",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "serie",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "alunos",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "anoLetivo",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "id",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 1,
+    "WriteCapacityUnits": 1
+  },
+  "TableName": "gestao_ensino_ano_letivo",
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "indexId",
+      "KeySchema": [
+        {
+          "AttributeName": "id",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "alunos",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 1,
+        "WriteCapacityUnits": 1
+      }
+    }
+  ]
+}

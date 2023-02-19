@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.domain.repository;
+package com.gestaoensino.gestao_ensino.domain.repository.redis;
 
 import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import org.springframework.data.repository.CrudRepository;

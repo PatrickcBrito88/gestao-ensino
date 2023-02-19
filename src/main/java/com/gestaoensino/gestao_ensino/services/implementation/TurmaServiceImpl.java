@@ -5,7 +5,7 @@ import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoExcepti
 import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
-import com.gestaoensino.gestao_ensino.domain.repository.TurmaRepository;
+import com.gestaoensino.gestao_ensino.domain.repository.redis.TurmaRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.TurmaService;

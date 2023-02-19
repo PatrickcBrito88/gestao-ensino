@@ -2,7 +2,7 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Professor;
-import com.gestaoensino.gestao_ensino.domain.repository.ProfessorRepository;
+import com.gestaoensino.gestao_ensino.domain.repository.redis.ProfessorRepository;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
 import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;

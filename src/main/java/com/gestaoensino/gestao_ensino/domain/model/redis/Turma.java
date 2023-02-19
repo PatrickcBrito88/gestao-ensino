@@ -1,7 +1,7 @@
 package com.gestaoensino.gestao_ensino.domain.model.redis;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.gestaoensino.gestao_ensino.domain.enums.ESerie;
 import lombok.Data;
@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 public class Turma {
 
     @Id
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "turmaId-index")
+    @DynamoDBHashKey
     private Integer id;
     private String nome;
     @DynamoDBTypeConvertedEnum

@@ -1,10 +1,9 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
-import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
+import com.gestaoensino.gestao_ensino.domain.repository.redis.DisciplinaRepository;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
@@ -18,13 +17,11 @@ import java.util.List;
 public class DisciplinaServiceImpl implements DisciplinaService {
 
     private final DisciplinaRepository disciplinaRepository;
-    private final DisciplinaAssembler disciplinaAssembler;
 
     public DisciplinaServiceImpl(DisciplinaRepository disciplinaRepository,
                                  ModelMapper modelMapper,
                                  DisciplinaAssembler disciplinaAssembler) {
         this.disciplinaRepository = disciplinaRepository;
-        this.disciplinaAssembler = disciplinaAssembler;
     }
 
     private Integer buscaUltimoNumeroInserido() {

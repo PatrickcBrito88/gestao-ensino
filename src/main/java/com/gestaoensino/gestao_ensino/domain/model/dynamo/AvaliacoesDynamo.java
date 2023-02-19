@@ -1,5 +1,6 @@
 package com.gestaoensino.gestao_ensino.domain.model.dynamo;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.gestaoensino.gestao_ensino.domain.enums.EPeriodo;
 import lombok.Data;
 
@@ -8,8 +9,10 @@ import java.util.List;
 @Data
 public class AvaliacoesDynamo {
 
+    @DynamoDBAttribute
     private EPeriodo periodo;
-    private List<Double> nota;
-
+    @DynamoDBAttribute
+    private List<Double> notas;
+    @DynamoDBAttribute
     private Double media;
 }

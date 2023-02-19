@@ -3,7 +3,7 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
-import com.gestaoensino.gestao_ensino.domain.repository.AlunoRepository;
+import com.gestaoensino.gestao_ensino.domain.repository.redis.AlunoRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
