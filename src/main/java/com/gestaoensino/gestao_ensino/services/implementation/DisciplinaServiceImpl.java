@@ -1,7 +1,6 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
@@ -34,8 +33,8 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    public Disciplina salvarDisciplina(DisciplinaDTO disciplinaDTO) {
-        return disciplinaRepository.save(disciplinaAssembler.desmontaDto(disciplinaDTO));
+    public Disciplina salvarDisciplina(Disciplina disciplina) {
+        return disciplinaRepository.save(disciplina);
     }
 
     @Override

@@ -101,6 +101,17 @@
 			<artifactId>aws-java-sdk-dynamodb</artifactId>
 			<version>1.12.410</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+			<version>2.9.9</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

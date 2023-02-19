@@ -1,5 +1,6 @@
 package com.gestaoensino.gestao_ensino.api.dtos;
 
+import com.gestaoensino.gestao_ensino.domain.enums.ESerie;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,6 @@ public class TurmaDTO {
     @NotBlank(message = "{turma.nome.vazio}")
     private String nome;
     @NotBlank(message = "{turma.serie.vazio}")
-    private String serie;
+    private ESerie serie;
 
 }
