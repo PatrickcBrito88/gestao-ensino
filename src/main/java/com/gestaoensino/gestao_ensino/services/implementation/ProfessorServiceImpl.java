@@ -1,9 +1,10 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.model.Professor;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Professor;
 import com.gestaoensino.gestao_ensino.domain.repository.ProfessorRepository;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
+import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public Professor editarProfessor(Professor professorNovo, Long id) {
+    public Professor editarProfessor(Professor professorNovo, String id) {
         Professor professorAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(professorNovo, professorAtual, "id");
         return professorAtual = professorRepository.save(professorAtual);
@@ -36,17 +37,17 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public void apagarProfessor(Long id) {
+    public void apagarProfessor(String id) {
         Professor professor = buscarOuFalhar(id);
         professorRepository.delete(professor);
     }
 
     @Override
-    public Professor buscarProfessor(Long id) {
+    public Professor buscarProfessor(String id) {
         return buscarOuFalhar(id);
     }
 
-    public Professor buscarOuFalhar(Long id) {
+    public Professor buscarOuFalhar(String id) {
         return professorRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("professor.nao.encontrado", id)));
@@ -55,6 +56,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public List<Professor> listarProfessores() {
-      return professorRepository.findAll();
+      return CollectionUtils.getListFromIterable(professorRepository.findAll());
     }
 }

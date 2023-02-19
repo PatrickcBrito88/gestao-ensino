@@ -3,9 +3,10 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
+import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +28,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         this.disciplinaAssembler = disciplinaAssembler;
     }
 
-    private Disciplina buscarOuFalhar(Long id){
+    private Disciplina buscarOuFalhar(String id){
         return disciplinaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("disciplina.nao.encontrada", id)));
@@ -41,7 +42,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 
     @Override
     @Transactional
-    public Disciplina editarDisciplina(Disciplina disciplinaNova, Long id) {
+    public Disciplina editarDisciplina(Disciplina disciplinaNova, String id) {
         Disciplina disciplinaAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(disciplinaNova, disciplinaAtual, "id");
         return disciplinaRepository.save(disciplinaAtual);
@@ -49,18 +50,18 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 
     @Override
     @Transactional
-    public void apagarDisciplina(Long id) {
+    public void apagarDisciplina(String id) {
         Disciplina disciplina = buscarOuFalhar(id);
         disciplinaRepository.delete(disciplina);
     }
 
     @Override
-    public Disciplina buscarDisciplina(Long id) {
+    public Disciplina buscarDisciplina(String id) {
         return buscarOuFalhar(id);
     }
 
     @Override
     public List<Disciplina> listarDisciplinas() {
-        return disciplinaRepository.findAll();
+        return CollectionUtils.getListFromIterable(disciplinaRepository.findAll());
     }
 }

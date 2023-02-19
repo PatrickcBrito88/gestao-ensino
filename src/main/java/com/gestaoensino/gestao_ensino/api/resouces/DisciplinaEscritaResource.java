@@ -4,16 +4,10 @@ import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,13 +30,13 @@ public class DisciplinaEscritaResource extends GestaoEnsinoResource {
 
     @PutMapping(value = "/atualizar/{idDisciplina}")
     public ResponseEntity<RestResponseDTO<DisciplinaDTO>> editarDisciplina(@RequestBody @Valid DisciplinaDTO disciplinaDTO,
-                                                                            @PathVariable Long idDisciplina){
+                                                                            @PathVariable String idDisciplina){
         Disciplina disciplina = disciplinaAssembler.desmontaDto(disciplinaDTO);
         return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.editarDisciplina(disciplina, idDisciplina)));
     }
 
     @DeleteMapping(value = "/{idDisciplina}")
-    public ResponseEntity<RestResponseDTO<String>> apagarDisciplina(@PathVariable Long idDisciplina){
+    public ResponseEntity<RestResponseDTO<String>> apagarDisciplina(@PathVariable String idDisciplina){
         disciplinaService.apagarDisciplina(idDisciplina);
         return retornarSucesso("Disciplina deletada com sucesso!");
     }

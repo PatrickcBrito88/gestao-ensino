@@ -1,7 +1,7 @@
 package com.gestaoensino.gestao_ensino.services;
 
 import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
-import com.gestaoensino.gestao_ensino.domain.model.Turma;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface TurmaService {
 
     Turma cadastrarTurma (TurmaDTO turmaDTO);
 
-    Turma buscarTurma(Long idTurma);
+    Turma buscarTurma(String idTurma);
 
 //    void adicionarDisciplina (Long idDisciplina, Long idTurma);
 //
@@ -23,6 +23,6 @@ public interface TurmaService {
 
     void apagarTurma(Long id);
 
-    Turma editarDisciplina(String nome, Long id);
+    Turma editarDisciplina(String nome, String id);
 
 }

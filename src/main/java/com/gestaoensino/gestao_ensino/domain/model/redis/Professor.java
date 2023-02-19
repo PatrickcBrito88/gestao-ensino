@@ -1,18 +1,15 @@
-package com.gestaoensino.gestao_ensino.domain.model;
+package com.gestaoensino.gestao_ensino.domain.model.redis;
 
 import lombok.Data;
+import org.springframework.data.redis.core.RedisHash;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 @Data
+@RedisHash("GestaoEnsino_Professor")
 public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCompleto;
     private String nomeComum;

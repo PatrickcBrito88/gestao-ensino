@@ -1,7 +1,7 @@
 package com.gestaoensino.gestao_ensino.api.assembler;
 
 import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
-import com.gestaoensino.gestao_ensino.domain.model.Turma;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

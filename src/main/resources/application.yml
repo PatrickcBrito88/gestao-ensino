@@ -1,0 +1,9 @@
+####################
+###### REDIS ######
+####################
+redis:
+  host: localhost
+  port: 6379
+  database:
+    index: 1
+  password:

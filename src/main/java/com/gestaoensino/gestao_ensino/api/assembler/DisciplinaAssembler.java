@@ -2,7 +2,7 @@ package com.gestaoensino.gestao_ensino.api.assembler;
 
 import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.response.DisciplinaResponseDTO;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

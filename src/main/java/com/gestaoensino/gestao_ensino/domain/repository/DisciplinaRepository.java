@@ -1,7 +1,7 @@
 package com.gestaoensino.gestao_ensino.domain.repository;
 
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
+import org.springframework.data.repository.CrudRepository;
 
-public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
+public interface DisciplinaRepository extends CrudRepository<Disciplina, String> {
 }

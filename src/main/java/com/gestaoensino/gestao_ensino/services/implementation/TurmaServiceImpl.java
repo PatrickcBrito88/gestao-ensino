@@ -3,13 +3,14 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 import com.gestaoensino.gestao_ensino.api.assembler.TurmaAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.TurmaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.model.Aluno;
-import com.gestaoensino.gestao_ensino.domain.model.Disciplina;
-import com.gestaoensino.gestao_ensino.domain.model.Turma;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import com.gestaoensino.gestao_ensino.domain.repository.TurmaRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.TurmaService;
+import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class TurmaServiceImpl implements TurmaService {
         this.alunoService = alunoService;
     }
 
-    private Turma buscarOuFalhar(Long id){
+    private Turma buscarOuFalhar(String id){
         return turmaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("turma.nao.encontrada", id)));
@@ -58,20 +59,20 @@ public class TurmaServiceImpl implements TurmaService {
         return turmaRepository.save(turma);
     }
 
-    private Set<Aluno> montaListaAlunos (Set<Long> idsAlunos){
+    private Set<Aluno> montaListaAlunos (Set<String> idsAlunos){
         return idsAlunos.stream()
                 .map(alunoService::buscarAluno)
                 .collect(Collectors.toSet());
     }
 
-    private Set<Disciplina> montaListaDisciplinas (Set<Long> idsDisciplinas){
+    private Set<Disciplina> montaListaDisciplinas (Set<String> idsDisciplinas){
         return idsDisciplinas.stream()
                 .map(id -> disciplinaService.buscarDisciplina(id))
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public Turma buscarTurma(Long idTurma) {
+    public Turma buscarTurma(String idTurma) {
         return buscarOuFalhar(idTurma);
     }
 
@@ -93,7 +94,7 @@ public class TurmaServiceImpl implements TurmaService {
 
     @Override
     public List<Turma> listarTurmas() {
-        return turmaRepository.findAll();
+        return CollectionUtils.getListFromIterable(turmaRepository.findAll());
     }
 
 //    @Override
@@ -119,7 +120,7 @@ public class TurmaServiceImpl implements TurmaService {
 
     @Override
     @Transactional
-    public Turma editarDisciplina(String nome, Long id) {
+    public Turma editarDisciplina(String nome, String id) {
         Turma turma = buscarOuFalhar(id);
         turma.setNome(nome);
         return turmaRepository.save(turma);

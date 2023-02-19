@@ -3,10 +3,10 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 import com.gestaoensino.gestao_ensino.api.assembler.AlunoAssembler;
 import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.exception.AlunoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.model.Aluno;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import com.gestaoensino.gestao_ensino.domain.repository.AlunoRepository;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
+import com.gestaoensino.gestao_ensino.utils.CollectionUtils;
 import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class AlunoServiceImpl implements AlunoService {
         this.alunoAssembler = alunoAssembler;
     }
 
-    public Aluno buscarOuFalhar(Long id) {
+    public Aluno buscarOuFalhar(String id) {
         return alunoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("aluno.nao.encontrado", id)));
@@ -36,25 +36,25 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
-    public Aluno editarAluno(Aluno alunoNovo, Long id) {
+    public Aluno editarAluno(Aluno alunoNovo, String id) {
         Aluno alunoAntigo = buscarOuFalhar(id);
         BeanUtils.copyProperties(alunoNovo, alunoAntigo, "id");
         return alunoRepository.save(alunoAntigo);
     }
 
     @Override
-    public void apagarAluno(Long id) {
+    public void apagarAluno(String id) {
         Aluno aluno = buscarOuFalhar(id);
         alunoRepository.delete(aluno);
     }
 
     @Override
-    public Aluno buscarAluno(Long id) {
+    public Aluno buscarAluno(String id) {
         return buscarOuFalhar(id);
     }
 
     @Override
     public List<Aluno> listarAlunos() {
-        return alunoRepository.findAll();
+        return CollectionUtils.getListFromIterable(alunoRepository.findAll());
     }
 }

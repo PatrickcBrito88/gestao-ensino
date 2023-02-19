@@ -2,7 +2,7 @@ package com.gestaoensino.gestao_ensino.api.assembler;
 
 import com.gestaoensino.gestao_ensino.api.dtos.AlunoDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.response.AlunoResponseDTO;
-import com.gestaoensino.gestao_ensino.domain.model.Aluno;
+import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
