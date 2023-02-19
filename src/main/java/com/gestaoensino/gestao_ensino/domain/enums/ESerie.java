@@ -1,4 +1,4 @@
-package com.gestaoensino.gestao_ensino.domain.enuns;
+package com.gestaoensino.gestao_ensino.domain.enums;
 
 public enum ESerie {
 

@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -35,13 +34,11 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    @Transactional
     public Disciplina salvarDisciplina(DisciplinaDTO disciplinaDTO) {
         return disciplinaRepository.save(disciplinaAssembler.desmontaDto(disciplinaDTO));
     }
 
     @Override
-    @Transactional
     public Disciplina editarDisciplina(Disciplina disciplinaNova, String id) {
         Disciplina disciplinaAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(disciplinaNova, disciplinaAtual, "id");
@@ -49,7 +46,6 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    @Transactional
     public void apagarDisciplina(String id) {
         Disciplina disciplina = buscarOuFalhar(id);
         disciplinaRepository.delete(disciplina);

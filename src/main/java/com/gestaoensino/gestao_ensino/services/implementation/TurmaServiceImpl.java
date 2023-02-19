@@ -15,7 +15,6 @@ import com.gestaoensino.gestao_ensino.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,7 +47,6 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    @Transactional
     public Turma cadastrarTurma(TurmaDTO turmaDTO) {
         Turma turma = turmaAssembler.desmontaDto(turmaDTO);
 //        Set<Aluno> listaAlunos = montaListaAlunos(turmaDTO.getIdAlunos());
@@ -119,7 +117,6 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    @Transactional
     public Turma editarDisciplina(String nome, String id) {
         Turma turma = buscarOuFalhar(id);
         turma.setNome(nome);
