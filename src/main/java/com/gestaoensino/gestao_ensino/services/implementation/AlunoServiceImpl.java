@@ -27,7 +27,7 @@ public class AlunoServiceImpl implements AlunoService {
             return 1;
         } else {
             Integer maiorNumeroCadastrado = alunosCadastrados.stream()
-                    .map(aluno -> aluno.getId())
+                    .map(Aluno::getId)
                     .max(Long::compare).get();
             return ++maiorNumeroCadastrado;
         }

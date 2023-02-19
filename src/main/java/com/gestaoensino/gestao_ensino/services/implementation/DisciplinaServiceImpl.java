@@ -1,7 +1,6 @@
 package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.DisciplinaAssembler;
-import com.gestaoensino.gestao_ensino.api.dtos.DisciplinaDTO;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.repository.DisciplinaRepository;
@@ -27,6 +26,18 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         this.disciplinaAssembler = disciplinaAssembler;
     }
 
+    private Integer buscaUltimoNumeroInserido() {
+        List<Disciplina> disciplinasCadastradas = CollectionUtils.getListFromIterable(disciplinaRepository.findAll());
+        if (disciplinasCadastradas.size() < 1) {
+            return 1;
+        } else {
+            Integer maiorNumeroCadastrado = disciplinasCadastradas.stream()
+                    .map(Disciplina::getId)
+                    .max(Long::compare).get();
+            return ++maiorNumeroCadastrado;
+        }
+    }
+
     private Disciplina buscarOuFalhar(String id){
         return disciplinaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
@@ -34,8 +45,9 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    public Disciplina salvarDisciplina(DisciplinaDTO disciplinaDTO) {
-        return disciplinaRepository.save(disciplinaAssembler.desmontaDto(disciplinaDTO));
+    public Disciplina salvarDisciplina(Disciplina disciplina) {
+        disciplina.setId(buscaUltimoNumeroInserido());
+        return disciplinaRepository.save(disciplina);
     }
 
     @Override

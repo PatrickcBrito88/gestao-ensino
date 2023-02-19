@@ -25,7 +25,8 @@ public class DisciplinaEscritaResource extends GestaoEnsinoResource {
 
     @PostMapping(value = "/salvar")
     public ResponseEntity<RestResponseDTO<DisciplinaDTO>> salvarDisciplina(@RequestBody @Valid DisciplinaDTO disciplinaDTO){
-        return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.salvarDisciplina(disciplinaDTO)));
+        Disciplina disciplina = disciplinaAssembler.desmontaDto(disciplinaDTO);
+        return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.salvarDisciplina(disciplina)));
     }
 
     @PutMapping(value = "/atualizar/{idDisciplina}")

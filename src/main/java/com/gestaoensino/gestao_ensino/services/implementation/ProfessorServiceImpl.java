@@ -21,9 +21,22 @@ public class ProfessorServiceImpl implements ProfessorService {
         this.professorRepository = professorRepository;
     }
 
+    private Integer buscaUltimoNumeroInserido() {
+        List<Professor> professoresCadastrados = CollectionUtils.getListFromIterable(professorRepository.findAll());
+        if (professoresCadastrados.size() < 1) {
+            return 1;
+        } else {
+            Integer maiorNumeroCadastrado = professoresCadastrados.stream()
+                    .map(Professor::getId)
+                    .max(Long::compare).get();
+            return ++maiorNumeroCadastrado;
+        }
+    }
+
     @Override
     @Transactional
     public Professor salvarProfessor(Professor professor) {
+        professor.setId(buscaUltimoNumeroInserido());
         return professorRepository.save(professor);
     }
 
