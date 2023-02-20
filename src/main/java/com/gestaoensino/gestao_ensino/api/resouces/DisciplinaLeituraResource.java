@@ -26,7 +26,7 @@ public class DisciplinaLeituraResource extends GestaoEnsinoResource {
     }
 
     @GetMapping("/{idDisciplina}")
-    public ResponseEntity<RestResponseDTO<DisciplinaResponseDTO>> buscarDisciplina(@PathVariable String idDisciplina){
+    public ResponseEntity<RestResponseDTO<DisciplinaResponseDTO>> buscarDisciplina(@PathVariable Integer idDisciplina){
         return retornarSucesso(disciplinaAssembler.montaDisciplinaResponse(disciplinaService.buscarDisciplina(idDisciplina)));
     }
 

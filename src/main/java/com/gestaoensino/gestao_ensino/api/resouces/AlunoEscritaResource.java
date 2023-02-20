@@ -37,13 +37,13 @@ public class AlunoEscritaResource extends GestaoEnsinoResource {
 
     @PutMapping(value = "/atualizar/{idAluno}")
     private ResponseEntity<RestResponseDTO<AlunoDTO>> editarAluno(@RequestBody @Valid AlunoDTO alunoDTO,
-                                 @PathVariable String idAluno){
+                                 @PathVariable Integer idAluno){
         Aluno aluno = alunoAssembler.desmontaDto(alunoDTO);
         return retornarSucesso(alunoAssembler.montaAlunoDto(alunoService.editarAluno(aluno, idAluno)));
     }
 
     @DeleteMapping(value = "/{idAluno}")
-    public ResponseEntity<RestResponseDTO<String>> apagarAluno(@PathVariable String idAluno){
+    public ResponseEntity<RestResponseDTO<String>> apagarAluno(@PathVariable Integer idAluno){
         alunoService.apagarAluno(idAluno);
         return retornarSucesso("O aluno foi deletado com sucesso!");
     }

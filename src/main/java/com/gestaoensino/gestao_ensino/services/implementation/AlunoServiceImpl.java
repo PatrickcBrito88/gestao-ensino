@@ -33,8 +33,8 @@ public class AlunoServiceImpl implements AlunoService {
         }
     }
 
-    public Aluno buscarOuFalhar(String id) {
-        return alunoRepository.findById(id)
+    public Aluno buscarOuFalhar(Integer id) {
+        return alunoRepository.findById(id.toString())
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("aluno.nao.encontrado", id)));
     }
@@ -46,20 +46,20 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
-    public Aluno editarAluno(Aluno alunoNovo, String id) {
+    public Aluno editarAluno(Aluno alunoNovo, Integer id) {
         Aluno alunoAntigo = buscarOuFalhar(id);
         BeanUtils.copyProperties(alunoNovo, alunoAntigo, "id");
         return alunoRepository.save(alunoAntigo);
     }
 
     @Override
-    public void apagarAluno(String id) {
+    public void apagarAluno(Integer id) {
         Aluno aluno = buscarOuFalhar(id);
         alunoRepository.delete(aluno);
     }
 
     @Override
-    public Aluno buscarAluno(String id) {
+    public Aluno buscarAluno(Integer id) {
         return buscarOuFalhar(id);
     }
 

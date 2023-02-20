@@ -1,5 +1,6 @@
 package com.gestaoensino.gestao_ensino.domain.model.redis;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
@@ -17,8 +18,10 @@ public class Turma {
     @Id
     @DynamoDBHashKey
     private Integer id;
+    @DynamoDBAttribute
     private String nome;
     @DynamoDBTypeConvertedEnum
+    @DynamoDBAttribute
     private ESerie serie;
 
 }

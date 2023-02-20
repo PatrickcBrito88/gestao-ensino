@@ -1,9 +1,11 @@
 package com.gestaoensino.gestao_ensino.domain.repository.dynamo;
 
+import com.gestaoensino.gestao_ensino.api.dtos.input.TurmaDynamoInput;
 import com.gestaoensino.gestao_ensino.domain.model.dynamo.TurmaDynamo;
-import com.gestaoensino.gestao_ensino.domain.wrappers.aws.dynamo.repository.DynamoRepository;
 
 
-public interface TurmaDynamoRepository extends DynamoRepository<TurmaDynamo> {
+public interface TurmaDynamoRepository  {
+
+    TurmaDynamo salvar (TurmaDynamoInput turmaDynamoInput);
 
 }

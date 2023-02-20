@@ -7,8 +7,8 @@ import java.util.List;
 public interface AlunoService {
 
     Aluno salvarAluno (Aluno aluno);
-    Aluno editarAluno(Aluno aluno, String id);
-    void apagarAluno(String id);
-    Aluno buscarAluno(String id);
+    Aluno editarAluno(Aluno aluno, Integer id);
+    void apagarAluno(Integer id);
+    Aluno buscarAluno(Integer id);
     List<Aluno> listarAlunos();
 }

@@ -2,7 +2,6 @@ package com.gestaoensino.gestao_ensino.services.implementation;
 
 import com.gestaoensino.gestao_ensino.api.assembler.TurmaAssembler;
 import com.gestaoensino.gestao_ensino.api.exceptions.RecursoNaoEncontradoException;
-import com.gestaoensino.gestao_ensino.domain.model.redis.Aluno;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Disciplina;
 import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import com.gestaoensino.gestao_ensino.domain.repository.redis.TurmaRepository;
@@ -46,13 +45,13 @@ public class TurmaServiceImpl implements TurmaService {
         } else {
             Integer maiorNumeroCadastrado = turmasCadastradas.stream()
                     .map(Turma::getId)
-                    .max(Long::compare).get();
+                    .max(Integer::compare).get();
             return ++maiorNumeroCadastrado;
         }
     }
 
-    private Turma buscarOuFalhar(String id){
-        return turmaRepository.findById(id)
+    private Turma buscarOuFalhar(Integer id){
+        return turmaRepository.findById(id.toString())
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("turma.nao.encontrada", id)));
     }
@@ -63,20 +62,20 @@ public class TurmaServiceImpl implements TurmaService {
         return turmaRepository.save(turma);
     }
 
-    private Set<Aluno> montaListaAlunos (Set<String> idsAlunos){
-        return idsAlunos.stream()
-                .map(alunoService::buscarAluno)
-                .collect(Collectors.toSet());
-    }
+//    private Set<Aluno> montaListaAlunos (Set<String> idsAlunos){
+//        return idsAlunos.stream()
+//                .map(alunoService::buscarAluno)
+//                .collect(Collectors.toSet());
+//    }
 
-    private Set<Disciplina> montaListaDisciplinas (Set<String> idsDisciplinas){
+    private Set<Disciplina> montaListaDisciplinas (Set<Integer> idsDisciplinas){
         return idsDisciplinas.stream()
-                .map(id -> disciplinaService.buscarDisciplina(id))
+                .map(disciplinaService::buscarDisciplina)
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public Turma buscarTurma(String idTurma) {
+    public Turma buscarTurma(Integer idTurma) {
         return buscarOuFalhar(idTurma);
     }
 
@@ -123,7 +122,7 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    public Turma editarDisciplina(String nome, String id) {
+    public Turma editarDisciplina(String nome, Integer id) {
         Turma turma = buscarOuFalhar(id);
         turma.setNome(nome);
         return turmaRepository.save(turma);

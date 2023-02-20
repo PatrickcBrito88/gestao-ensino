@@ -37,13 +37,13 @@ public class DisciplinaEscritaResource extends GestaoEnsinoResource {
 
     @PutMapping(value = "/atualizar/{idDisciplina}")
     public ResponseEntity<RestResponseDTO<DisciplinaDTO>> editarDisciplina(@RequestBody @Valid DisciplinaDTO disciplinaDTO,
-                                                                            @PathVariable String idDisciplina){
+                                                                            @PathVariable Integer idDisciplina){
         Disciplina disciplina = disciplinaAssembler.desmontaDto(disciplinaDTO);
         return retornarSucesso(disciplinaAssembler.montaDto(disciplinaService.editarDisciplina(disciplina, idDisciplina)));
     }
 
     @DeleteMapping(value = "/{idDisciplina}")
-    public ResponseEntity<RestResponseDTO<String>> apagarDisciplina(@PathVariable String idDisciplina){
+    public ResponseEntity<RestResponseDTO<String>> apagarDisciplina(@PathVariable Integer idDisciplina){
         disciplinaService.apagarDisciplina(idDisciplina);
         return retornarSucesso("Disciplina deletada com sucesso!");
     }

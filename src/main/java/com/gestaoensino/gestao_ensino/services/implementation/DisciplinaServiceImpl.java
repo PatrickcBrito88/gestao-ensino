@@ -36,8 +36,8 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         }
     }
 
-    private Disciplina buscarOuFalhar(String id){
-        return disciplinaRepository.findById(id)
+    private Disciplina buscarOuFalhar(Integer id){
+        return disciplinaRepository.findById(id.toString())
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("disciplina.nao.encontrada", id)));
     }
@@ -49,20 +49,20 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    public Disciplina editarDisciplina(Disciplina disciplinaNova, String id) {
+    public Disciplina editarDisciplina(Disciplina disciplinaNova, Integer id) {
         Disciplina disciplinaAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(disciplinaNova, disciplinaAtual, "id");
         return disciplinaRepository.save(disciplinaAtual);
     }
 
     @Override
-    public void apagarDisciplina(String id) {
+    public void apagarDisciplina(Integer id) {
         Disciplina disciplina = buscarOuFalhar(id);
         disciplinaRepository.delete(disciplina);
     }
 
     @Override
-    public Disciplina buscarDisciplina(String id) {
+    public Disciplina buscarDisciplina(Integer id) {
         return buscarOuFalhar(id);
     }
 

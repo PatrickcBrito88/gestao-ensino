@@ -27,7 +27,7 @@ public class dynamoConfig {
 
     private AwsClientBuilder.EndpointConfiguration endpointConfiguration() {
         return new AwsClientBuilder.EndpointConfiguration(
-                "http://localhost:8000/",
+                "dynamodb.sa-east-1.amazonaws.com",
                 "sa-east-1"
         );
     }
@@ -35,8 +35,8 @@ public class dynamoConfig {
     private AWSStaticCredentialsProvider credentialsProvider() {
         return new AWSStaticCredentialsProvider(
                 new BasicAWSCredentials(
-                        "fakeId",
-                        "fakeSecret"
+                        "AKIAYRI7WMW5YPXFQMGR",
+                        "NrdHFem4NGEfc+81PcWktB3m/nuVCcnncH9+ZeUY"
                 )
         );
     }

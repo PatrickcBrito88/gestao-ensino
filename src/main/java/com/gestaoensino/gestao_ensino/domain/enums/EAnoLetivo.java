@@ -1,5 +1,8 @@
 package com.gestaoensino.gestao_ensino.domain.enums;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+
+@DynamoDBDocument
 public enum EAnoLetivo {
 
     ANO_2023(1, "2023");

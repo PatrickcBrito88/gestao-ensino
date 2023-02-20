@@ -7,8 +7,8 @@ import java.util.List;
 public interface ProfessorService {
 
     Professor salvarProfessor (Professor professor);
-    Professor editarProfessor(Professor professor, String id);
-    void apagarProfessor(String id);
-    Professor buscarProfessor(String id);
+    Professor editarProfessor(Professor professor, Integer id);
+    void apagarProfessor(Integer id);
+    Professor buscarProfessor(Integer id);
     List<Professor> listarProfessores();
 }

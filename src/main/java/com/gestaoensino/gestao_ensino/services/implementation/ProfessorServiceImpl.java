@@ -42,7 +42,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public Professor editarProfessor(Professor professorNovo, String id) {
+    public Professor editarProfessor(Professor professorNovo, Integer id) {
         Professor professorAtual = buscarOuFalhar(id);
         BeanUtils.copyProperties(professorNovo, professorAtual, "id");
         return professorAtual = professorRepository.save(professorAtual);
@@ -50,18 +50,18 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public void apagarProfessor(String id) {
+    public void apagarProfessor(Integer id) {
         Professor professor = buscarOuFalhar(id);
         professorRepository.delete(professor);
     }
 
     @Override
-    public Professor buscarProfessor(String id) {
+    public Professor buscarProfessor(Integer id) {
         return buscarOuFalhar(id);
     }
 
-    public Professor buscarOuFalhar(String id) {
-        return professorRepository.findById(id)
+    public Professor buscarOuFalhar(Integer id) {
+        return professorRepository.findById(id.toString())
                 .orElseThrow(() -> new RecursoNaoEncontradoException(
                         StringUtils.getMensagemValidacao("professor.nao.encontrado", id)));
 

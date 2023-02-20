@@ -7,9 +7,9 @@ import java.util.List;
 public interface DisciplinaService {
 
     Disciplina salvarDisciplina (Disciplina disciplina);
-    Disciplina editarDisciplina(Disciplina disciplina, String id);
-    void apagarDisciplina(String id);
-    Disciplina buscarDisciplina(String id);
+    Disciplina editarDisciplina(Disciplina disciplina, Integer id);
+    void apagarDisciplina(Integer id);
+    Disciplina buscarDisciplina(Integer id);
     List<Disciplina> listarDisciplinas();
 
 }

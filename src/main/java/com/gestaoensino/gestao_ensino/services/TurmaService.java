@@ -8,7 +8,7 @@ public interface TurmaService {
 
     Turma cadastrarTurma (Turma turma);
 
-    Turma buscarTurma(String idTurma);
+    Turma buscarTurma(Integer idTurma);
 
 //    void adicionarDisciplina (Long idDisciplina, Long idTurma);
 //
@@ -22,6 +22,6 @@ public interface TurmaService {
 
     void apagarTurma(Long id);
 
-    Turma editarDisciplina(String nome, String id);
+    Turma editarDisciplina(String nome, Integer id);
 
 }

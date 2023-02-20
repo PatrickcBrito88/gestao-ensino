@@ -3,15 +3,9 @@ package com.gestaoensino.gestao_ensino.api.dtos.input;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-public class DisciplinaInput {
+public class ProfessorInput {
 
     private Integer id;
-    private List<AvaliacaoInput> avaliacoes;
-    private ProfessorInput professor;
-
-
 }
