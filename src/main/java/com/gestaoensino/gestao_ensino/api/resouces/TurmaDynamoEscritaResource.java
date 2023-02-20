@@ -4,7 +4,7 @@ import com.gestaoensino.gestao_ensino.api.dtos.RestResponseDTO;
 import com.gestaoensino.gestao_ensino.api.dtos.input.TurmaDynamoInput;
 import com.gestaoensino.gestao_ensino.api.resouces.modelo.GestaoEnsinoResource;
 import com.gestaoensino.gestao_ensino.domain.model.dynamo.TurmaDynamo;
-import com.gestaoensino.gestao_ensino.domain.repository.dynamo.TurmaDynamoRepository;
+import com.gestaoensino.gestao_ensino.services.TurmaDynamoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/sistema-gestao-ensino/turma-dynamo")
 public class TurmaDynamoEscritaResource extends GestaoEnsinoResource {
 
-    private TurmaDynamoRepository turmaDynamoRepository;
+    private final TurmaDynamoService turmaDynamoService;
 
-    public TurmaDynamoEscritaResource(TurmaDynamoRepository turmaDynamoRepository) {
-        this.turmaDynamoRepository = turmaDynamoRepository;
+    public TurmaDynamoEscritaResource(TurmaDynamoService turmaDynamoService) {
+        this.turmaDynamoService = turmaDynamoService;
     }
 
     @PostMapping("/salvar-turma")
     public ResponseEntity<RestResponseDTO<TurmaDynamo>> salvarTurma(@RequestBody TurmaDynamoInput turmaDynamoInput){
 
-        return retornarSucesso(turmaDynamoRepository.salvar(turmaDynamoInput));
+        return retornarSucesso(turmaDynamoService.salvarTurma(turmaDynamoInput));
     }
 }

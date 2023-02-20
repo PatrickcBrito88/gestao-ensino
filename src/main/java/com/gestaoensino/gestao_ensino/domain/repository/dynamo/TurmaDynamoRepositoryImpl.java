@@ -13,6 +13,7 @@ import com.gestaoensino.gestao_ensino.domain.model.redis.Turma;
 import com.gestaoensino.gestao_ensino.services.AlunoService;
 import com.gestaoensino.gestao_ensino.services.DisciplinaService;
 import com.gestaoensino.gestao_ensino.services.ProfessorService;
+import com.gestaoensino.gestao_ensino.services.TurmaDynamoService;
 import com.gestaoensino.gestao_ensino.services.TurmaService;
 import org.apache.commons.math3.util.Pair;
 import org.modelmapper.ModelMapper;
@@ -23,14 +24,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class TurmaDynamoRepositoryImpl implements TurmaDynamoRepository {
+public class TurmaDynamoRepositoryImpl implements TurmaDynamoService {
 
     private final DynamoDBMapper dynamoDBMapper;
     private final AlunoService alunoService;
     private final DisciplinaService disciplinaService;
     private final ProfessorService professorService;
     private final TurmaService turmaService;
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public TurmaDynamoRepositoryImpl(DynamoDBMapper dynamoDBMapper,
                                      AlunoService alunoService,
@@ -44,6 +45,13 @@ public class TurmaDynamoRepositoryImpl implements TurmaDynamoRepository {
         this.professorService = professorService;
         this.turmaService = turmaService;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public TurmaDynamo salvarTurma(TurmaDynamoInput turmaDynamoInput) {
+        TurmaDynamo turmaDynamo = extraiDadosTurmaDynamo(turmaDynamoInput);
+        dynamoDBMapper.save(turmaDynamo);
+        return turmaDynamo;
     }
 
     private TurmaDynamo extraiDadosTurmaDynamo(TurmaDynamoInput turmaDynamoInput) {
@@ -74,7 +82,7 @@ public class TurmaDynamoRepositoryImpl implements TurmaDynamoRepository {
         List<DisciplinaDynamo> disciplinaFormatada = transfer.getSecond().stream()
                 .map(disciplinaInput -> modelMapper.map(disciplinaInput, DisciplinaDynamo.class))
                 .peek(disciplinaDynamo -> disciplinaDynamo.setAvaliacoes(disciplinaDynamo.getAvaliacoes().stream().map(avaliacao -> modelMapper.map(avaliacao, AvaliacoesDynamo.class)).collect(Collectors.toList())))
-                .peek(this::buscaDadosTurma)
+                .peek(this::geraCopiaDisciplina)
                 .peek(disciplinaDynamo -> disciplinaDynamo.setProfessor(modelMapper.map(professorService.buscarProfessor(disciplinaDynamo.getId()), ProfessorDynamo.class)))
                 .collect(Collectors.toList());
 
@@ -84,17 +92,10 @@ public class TurmaDynamoRepositoryImpl implements TurmaDynamoRepository {
                 .collect(Collectors.toList());
     }
 
-    private void buscaDadosTurma(DisciplinaDynamo disciplinaDynamo){
+    private void geraCopiaDisciplina(DisciplinaDynamo disciplinaDynamo){
         DisciplinaDynamo copia = modelMapper.map(disciplinaService.buscarDisciplina(disciplinaDynamo.getId()), DisciplinaDynamo.class);
         BeanUtils.copyProperties(copia, disciplinaDynamo, "avaliacoes");
     }
 
 
-
-    @Override
-    public TurmaDynamo salvar(TurmaDynamoInput turmaDynamoInput) {
-        TurmaDynamo turmaDynamo = extraiDadosTurmaDynamo(turmaDynamoInput);
-        dynamoDBMapper.save(turmaDynamo);
-        return turmaDynamo;
-    }
 }

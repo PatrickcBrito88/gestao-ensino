@@ -5,7 +5,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 @DynamoDBDocument
 public enum EAnoLetivo {
 
-    ANO_2023(1, "2023");
+    ANO_2023(1, "2023"),
+    ANO_2024(2, "2024");
 
     private final Integer id;
     private final String nome;
